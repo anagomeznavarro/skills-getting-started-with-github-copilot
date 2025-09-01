@@ -23,17 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const spotsLeft = details.max_participants - details.participants.length;
 
-        // Mostrar sección de participantes siempre
+        // Asegura que participants siempre sea un array
+        const participants = Array.isArray(details.participants) ? details.participants : [];
+
         const participantsHTML = `
           <div class="participants-section">
             <strong>Participants:</strong>
             <ul class="participants-list">
-              ${details.participants.length > 0
-                ? details.participants.map(email => `<li>${email}</li>`).join("")
-                : ""
-              }
+              ${participants.map(email => `<li>${email}</li>`).join("")}
             </ul>
-            ${details.participants.length === 0
+            ${participants.length === 0
               ? '<p class="no-participants">No participants yet.</p>'
               : ""
             }
